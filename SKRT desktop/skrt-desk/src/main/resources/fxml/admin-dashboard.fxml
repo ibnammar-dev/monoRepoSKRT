@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.skrtdesk.controller.AdminController">
+    
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+            <padding>
+                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+            </padding>
+            
+            <Label text="SKRT Social - Admin Dashboard" styleClass="navbar-title" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
+            <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
+            <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
+        </HBox>
+    </top>
+    
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Users">
+                <VBox spacing="15.0">
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                    </padding>
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <Label text="User Management" styleClass="section-title" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button text="Refresh" onAction="#handleRefreshUsers" />
+                    </HBox>
+                    
+                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="userIdColumn" text="ID" prefWidth="60" />
+                            <TableColumn fx:id="userEmailColumn" text="Email" prefWidth="200" />
+                            <TableColumn fx:id="userFirstNameColumn" text="First Name" prefWidth="150" />
+                            <TableColumn fx:id="userLastNameColumn" text="Last Name" prefWidth="150" />
+                            <TableColumn fx:id="userRolesColumn" text="Roles" prefWidth="150" />
+                            <TableColumn fx:id="userActionsColumn" text="Actions" prefWidth="100" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            
+            <Tab text="Posts">
+                <VBox spacing="15.0">
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                    </padding>
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <Label text="Post Management" styleClass="section-title" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button text="Refresh" onAction="#handleRefreshPosts" />
+                    </HBox>
+                    
+                    <TableView fx:id="postsTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="postIdColumn" text="ID" prefWidth="60" />
+                            <TableColumn fx:id="postAuthorColumn" text="Author" prefWidth="150" />
+                            <TableColumn fx:id="postTextColumn" text="Text" prefWidth="300" />
+                            <TableColumn fx:id="postLikesColumn" text="Likes" prefWidth="80" />
+                            <TableColumn fx:id="postCommentsColumn" text="Comments" prefWidth="100" />
+                            <TableColumn fx:id="postActionsColumn" text="Actions" prefWidth="100" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
+

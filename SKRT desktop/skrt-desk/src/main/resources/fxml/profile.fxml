@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.skrtdesk.controller.ProfileController">
+    
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+            <padding>
+                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+            </padding>
+            
+            <Label text="SKRT Social" styleClass="navbar-title" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
+            <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
+            <Button fx:id="adminButton" text="Admin" onAction="#handleAdmin" 
+                    styleClass="nav-button" visible="false" managed="false" />
+            <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
+        </HBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="feed-scroll">
+            <VBox spacing="20.0">
+                <padding>
+                    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                </padding>
+                
+                <!-- Profile Header -->
+                <VBox spacing="15.0" styleClass="profile-header">
+                    <Label fx:id="nameLabel" text="User Name" styleClass="profile-name" />
+                    <Label fx:id="emailLabel" text="user@email.com" styleClass="profile-email" />
+                    <Label fx:id="joinedLabel" text="Joined: 2024" styleClass="profile-joined" />
+                    
+                    <Button fx:id="editButton" text="Edit Profile" onAction="#handleEditProfile" 
+                            styleClass="primary-button" visible="false" managed="false" />
+                </VBox>
+                
+                <Separator />
+                
+                <!-- User Posts -->
+                <VBox spacing="15.0">
+                    <Label text="Posts" styleClass="section-title" />
+                    <VBox fx:id="postsContainer" spacing="15.0">
+                        <Label text="Loading posts..." style="-fx-text-fill: #666;" />
+                    </VBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
+

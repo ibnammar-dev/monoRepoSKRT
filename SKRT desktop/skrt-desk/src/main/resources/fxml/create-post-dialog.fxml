@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.skrtdesk.controller.CreatePostController">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    
+    <Label text="Create Post" styleClass="dialog-title" />
+    
+    <VBox spacing="5.0">
+        <Label text="What's on your mind?" />
+        <TextArea fx:id="textArea" promptText="Share your thoughts..." 
+                  wrapText="true" prefRowCount="5" />
+    </VBox>
+    
+    <HBox spacing="10.0" alignment="CENTER_LEFT">
+        <Button text="Choose Image" onAction="#handleChooseImage" />
+        <Label fx:id="imageLabel" text="No image selected" styleClass="image-label" />
+    </HBox>
+    
+    <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false" />
+    
+    <HBox spacing="10.0" alignment="CENTER_RIGHT">
+        <Button text="Cancel" onAction="#handleCancel" />
+        <Button fx:id="postButton" text="Post" onAction="#handlePost" styleClass="primary-button" />
+    </HBox>
+</VBox>
+

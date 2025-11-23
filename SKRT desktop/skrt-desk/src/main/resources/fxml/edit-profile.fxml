@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.skrtdesk.controller.EditProfileController">
+    
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+            <padding>
+                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+            </padding>
+            
+            <Button text="← Back" onAction="#handleBack" styleClass="nav-button" />
+            <Label text="SKRT Social - Edit Profile" styleClass="navbar-title" />
+        </HBox>
+    </top>
+    
+    <center>
+        <VBox spacing="20.0" alignment="CENTER">
+            <padding>
+                <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+            </padding>
+            
+            <VBox spacing="15.0" maxWidth="400.0">
+                <Label text="Edit Profile" styleClass="page-title" />
+                
+                <VBox spacing="5.0">
+                    <Label text="First Name" />
+                    <TextField fx:id="firstNameField" />
+                </VBox>
+                
+                <VBox spacing="5.0">
+                    <Label text="Last Name" />
+                    <TextField fx:id="lastNameField" />
+                </VBox>
+                
+                <VBox spacing="5.0">
+                    <Label text="Email" />
+                    <TextField fx:id="emailField" />
+                </VBox>
+                
+                <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false" />
+                
+                <HBox spacing="10.0" alignment="CENTER">
+                    <Button text="Cancel" onAction="#handleCancel" />
+                    <Button fx:id="saveButton" text="Save Changes" onAction="#handleSave" 
+                            styleClass="primary-button" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
+
