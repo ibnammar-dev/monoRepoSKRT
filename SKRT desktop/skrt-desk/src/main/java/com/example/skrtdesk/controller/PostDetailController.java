@@ -63,27 +63,17 @@ public class PostDetailController extends BaseController {
         
         // Image if exists
         if (currentPost.getImageUrl() != null && !currentPost.getImageUrl().isEmpty()) {
-            try {
-                String imageUrl = Constants.API_BASE_URL + currentPost.getImageUrl();
-                ImageView imageView = new ImageView();
-                imageView.setFitWidth(700);
-                imageView.setPreserveRatio(true);
-                
-                runAsync(() -> {
-                    try {
-                        Image image = new Image(imageUrl, true);
-                        Platform.runLater(() -> {
-                            imageView.setImage(image);
-                        });
-                    } catch (Exception e) {
-                        // Ignore
-                    }
-                });
-                
-                postContainer.getChildren().add(imageView);
-            } catch (Exception e) {
-                // Ignore
-            }
+            ImageView imageView = new ImageView();
+            imageView.setFitWidth(700);
+            imageView.setPreserveRatio(true);
+            imageView.setSmooth(true);
+            
+            // Use ImageLoader utility
+            com.example.skrtdesk.util.ImageLoader.getInstance().loadImage(
+                currentPost.getImageUrl(), imageView, 700
+            );
+            
+            postContainer.getChildren().add(imageView);
         }
         
         // Like info

@@ -8,21 +8,34 @@
             fx:controller="com.example.skrtdesk.controller.MainFeedController">
     
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
-            <padding>
-                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
-            </padding>
+        <VBox>
+            <!-- Impersonation Banner -->
+            <HBox fx:id="impersonationBanner" styleClass="impersonation-banner" alignment="CENTER" 
+                  spacing="15.0" visible="false" managed="false">
+                <Label fx:id="impersonationLabel" styleClass="impersonation-text" 
+                       text="⚠ Viewing as User" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Exit Impersonation" onAction="#handleExitImpersonation" 
+                        style="-fx-background-color: #856404; -fx-text-fill: white;" />
+            </HBox>
             
-            <Label text="SKRT Social" styleClass="navbar-title" />
-            
-            <Region HBox.hgrow="ALWAYS" />
-            
-            <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
-            <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
-            <Button fx:id="adminButton" text="Admin" onAction="#handleAdmin" 
-                    styleClass="nav-button" visible="false" managed="false" />
-            <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
-        </HBox>
+            <!-- Main Navbar -->
+            <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+                <padding>
+                    <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+                </padding>
+                
+                <Label text="SKRT Social" styleClass="navbar-title" />
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
+                <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
+                <Button fx:id="adminButton" text="Admin" onAction="#handleAdmin" 
+                        styleClass="nav-button" visible="false" managed="false" />
+                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
+            </HBox>
+        </VBox>
     </top>
     
     <center>

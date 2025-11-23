@@ -26,6 +26,8 @@ public class MainFeedController extends BaseController {
     @FXML private Button prevButton;
     @FXML private Button nextButton;
     @FXML private Label pageLabel;
+    @FXML private HBox impersonationBanner;
+    @FXML private Label impersonationLabel;
     
     private int currentPage = 1;
     private int totalPages = 1;
@@ -33,8 +35,20 @@ public class MainFeedController extends BaseController {
     
     @FXML
     public void initialize() {
-        // Show admin button if user is admin
-        if (sessionManager.isAdmin()) {
+        // Show admin button if original user is admin (not current impersonated user)
+        if (sessionManager.isImpersonating()) {
+            if (sessionManager.getOriginalUser() != null && 
+                sessionManager.getOriginalUser().getRoles() != null &&
+                sessionManager.getOriginalUser().getRoles().contains("ROLE_ADMIN")) {
+                adminButton.setVisible(true);
+                adminButton.setManaged(true);
+            }
+            
+            // Show impersonation banner
+            impersonationBanner.setVisible(true);
+            impersonationBanner.setManaged(true);
+            impersonationLabel.setText("⚠ Viewing as " + sessionManager.getCurrentUser().getFullName());
+        } else if (sessionManager.isAdmin()) {
             adminButton.setVisible(true);
             adminButton.setManaged(true);
         }
@@ -118,27 +132,17 @@ public class MainFeedController extends BaseController {
         
         // Image if exists
         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
-            try {
-                String imageUrl = Constants.API_BASE_URL + post.getImageUrl();
-                ImageView imageView = new ImageView();
-                imageView.setFitWidth(600);
-                imageView.setPreserveRatio(true);
-                
-                runAsync(() -> {
-                    try {
-                        Image image = new Image(imageUrl, true);
-                        Platform.runLater(() -> {
-                            imageView.setImage(image);
-                        });
-                    } catch (Exception e) {
-                        // Ignore image load errors
-                    }
-                });
-                
-                card.getChildren().add(imageView);
-            } catch (Exception e) {
-                // Ignore
-            }
+            ImageView imageView = new ImageView();
+            imageView.setFitWidth(600);
+            imageView.setPreserveRatio(true);
+            imageView.setSmooth(true);
+            
+            // Use ImageLoader utility
+            com.example.skrtdesk.util.ImageLoader.getInstance().loadImage(
+                post.getImageUrl(), imageView, 600
+            );
+            
+            card.getChildren().add(imageView);
         }
         
         // Actions
@@ -260,6 +264,12 @@ public class MainFeedController extends BaseController {
     @FXML
     private void handleAdmin() {
         viewManager.showAdminDashboard();
+    }
+    
+    @FXML
+    private void handleExitImpersonation() {
+        sessionManager.stopImpersonation();
+        viewManager.showMainFeed();
     }
     
     @FXML

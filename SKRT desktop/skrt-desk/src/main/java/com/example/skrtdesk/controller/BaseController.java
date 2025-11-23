@@ -17,6 +17,7 @@ public abstract class BaseController {
     protected PostService postService;
     protected LikeService likeService;
     protected CommentService commentService;
+    protected AdminService adminService;
     
     public BaseController() {
         this.viewManager = ViewManager.getInstance();
@@ -26,6 +27,7 @@ public abstract class BaseController {
         this.postService = PostService.getInstance();
         this.likeService = LikeService.getInstance();
         this.commentService = CommentService.getInstance();
+        this.adminService = AdminService.getInstance();
     }
     
     protected void showError(String title, String message) {

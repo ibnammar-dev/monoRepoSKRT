@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
 import java.util.List;
 import java.util.Map;
@@ -60,17 +61,27 @@ public class AdminController extends BaseController {
             return new javafx.beans.property.SimpleStringProperty(rolesStr);
         });
         
-        // Add delete button
+        // Add impersonate and delete buttons
         userActionsColumn.setCellFactory(col -> {
             TableCell<User, Void> cell = new TableCell<>() {
+                private final HBox buttonBox = new HBox(5);
+                private final Button impersonateButton = new Button("Login As");
                 private final Button deleteButton = new Button("Delete");
                 
                 {
+                    impersonateButton.setOnAction(event -> {
+                        User user = getTableView().getItems().get(getIndex());
+                        handleImpersonateUser(user);
+                    });
+                    impersonateButton.setStyle("-fx-background-color: #1877f2; -fx-text-fill: white;");
+                    
                     deleteButton.setOnAction(event -> {
                         User user = getTableView().getItems().get(getIndex());
                         handleDeleteUser(user);
                     });
                     deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white;");
+                    
+                    buttonBox.getChildren().addAll(impersonateButton, deleteButton);
                 }
                 
                 @Override
@@ -80,11 +91,15 @@ public class AdminController extends BaseController {
                         setGraphic(null);
                     } else {
                         User user = getTableView().getItems().get(getIndex());
-                        // Don't allow deleting yourself
-                        if (user.getId().equals(sessionManager.getCurrentUser().getId())) {
-                            setGraphic(null);
+                        buttonBox.getChildren().clear();
+                        
+                        // Don't allow actions on yourself or other admins
+                        if (!user.getId().equals(sessionManager.getCurrentUser().getId()) &&
+                            (user.getRoles() == null || !user.getRoles().contains("ROLE_ADMIN"))) {
+                            buttonBox.getChildren().addAll(impersonateButton, deleteButton);
+                            setGraphic(buttonBox);
                         } else {
-                            setGraphic(deleteButton);
+                            setGraphic(null);
                         }
                     }
                 }
@@ -174,6 +189,37 @@ public class AdminController extends BaseController {
                 });
             }
         });
+    }
+    
+    private void handleImpersonateUser(User user) {
+        if (showConfirmation("Impersonate User",
+            "Do you want to login as " + user.getFullName() + "? You'll be able to return to your admin account later.")) {
+            runAsync(() -> {
+                try {
+                    com.example.skrtdesk.model.ApiResponse<com.example.skrtdesk.model.AuthToken> response =
+                        adminService.impersonateUser(user.getId());
+                    
+                    if (response.isSuccess() && response.getData() != null) {
+                        Platform.runLater(() -> {
+                            // Start impersonation
+                            com.example.skrtdesk.model.AuthToken authToken = response.getData();
+                            sessionManager.startImpersonation(authToken.getToken(), authToken.getUser());
+                            
+                            showSuccess("Success", "Now viewing as " + user.getFullName());
+                            viewManager.showMainFeed();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            showError("Error", "Failed to impersonate user");
+                        });
+                    }
+                } catch (com.example.skrtdesk.exception.ApiException e) {
+                    Platform.runLater(() -> {
+                        showError("Error", "Failed to impersonate user: " + e.getMessage());
+                    });
+                }
+            });
+        }
     }
     
     private void handleDeleteUser(User user) {
