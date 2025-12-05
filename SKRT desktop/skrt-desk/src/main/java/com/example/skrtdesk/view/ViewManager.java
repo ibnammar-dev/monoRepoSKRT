@@ -71,7 +71,6 @@ public class ViewManager {
             
             primaryStage.setScene(scene);
             primaryStage.setTitle("SKRT Social - Profile");
-            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +107,6 @@ public class ViewManager {
             
             primaryStage.setScene(scene);
             primaryStage.setTitle("SKRT Social - Post");
-            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,10 +145,6 @@ public class ViewManager {
     
     private void loadView(String fxmlPath, String title) {
         try {
-            // Store current window dimensions
-            double currentWidth = primaryStage.getWidth();
-            double currentHeight = primaryStage.getHeight();
-            
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             
@@ -166,13 +160,6 @@ public class ViewManager {
             
             primaryStage.setScene(scene);
             primaryStage.setTitle(title);
-            
-            // Restore window dimensions
-            if (currentWidth > 0 && currentHeight > 0) {
-                primaryStage.setWidth(currentWidth);
-                primaryStage.setHeight(currentHeight);
-            }
-            
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,32 +6,32 @@
 <?import javafx.scene.text.*?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.example.skrtdesk.controller.RegisterController">
+           fx:controller="com.example.skrtdesk.controller.RegisterController"
+           styleClass="auth-background" prefWidth="1280" prefHeight="800">
     
-    <VBox alignment="CENTER" spacing="0.0">
-        <padding>
-            <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
-        </padding>
+    <!-- Centered Container -->
+    <VBox alignment="CENTER" spacing="0.0" VBox.vgrow="ALWAYS">
         
         <!-- Register Card -->
-        <VBox alignment="CENTER" spacing="0.0" maxWidth="440.0" styleClass="card">
+        <VBox alignment="CENTER" spacing="0.0" styleClass="auth-card">
+            
             <!-- Gradient Accent Bar -->
             <Region style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); 
                           -fx-background-radius: 12 12 0 0; -fx-pref-height: 4px;" />
             
-            <VBox alignment="CENTER" spacing="24.0">
+            <VBox alignment="CENTER" spacing="32.0">
                 <padding>
-                    <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+                    <Insets top="48.0" right="48.0" bottom="48.0" left="48.0"/>
                 </padding>
                 
                 <!-- Header -->
-                <VBox alignment="CENTER" spacing="8.0">
-                    <Text text="SKRT Social" styleClass="h1-text" style="-fx-fill: linear-gradient(to right, #667eea, #764ba2);" />
+                <VBox alignment="CENTER" spacing="12.0">
+                    <Text text="SKRT Social" styleClass="h1-text" style="-fx-fill: #667eea;" />
                     <Text text="Create your account" styleClass="body-large" style="-fx-fill: #6B7280;" />
                 </VBox>
                 
                 <!-- Form Fields -->
-                <VBox spacing="18.0">
+                <VBox spacing="20.0" prefWidth="360.0">
                     <HBox spacing="12.0">
                         <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                             <Label text="First Name" styleClass="label" />
@@ -64,7 +64,7 @@
                 
                 <!-- Register Button -->
                 <Button fx:id="registerButton" text="Create Account" onAction="#handleRegister" 
-                        styleClass="primary-button" maxWidth="Infinity" 
+                        styleClass="primary-button" prefWidth="360.0"
                         style="-fx-pref-height: 48px;" />
                 
                 <!-- Login Link -->

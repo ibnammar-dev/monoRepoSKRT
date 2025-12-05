@@ -5,12 +5,13 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.skrtdesk.controller.PostDetailController">
+            fx:controller="com.example.skrtdesk.controller.PostDetailController"
+            prefWidth="1280" prefHeight="800" style="-fx-background-color: #F7F9FC;">
     
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="24.0">
             <padding>
-                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+                <Insets top="16.0" right="32.0" bottom="16.0" left="32.0"/>
             </padding>
             
             <Button text="← Back" onAction="#handleBack" styleClass="nav-button" />
@@ -25,32 +26,43 @@
     </top>
     
     <center>
-        <ScrollPane fitToWidth="true" styleClass="feed-scroll">
-            <VBox spacing="20.0">
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    style="-fx-background: #F7F9FC; -fx-background-color: #F7F9FC;">
+            <VBox alignment="TOP_CENTER" spacing="0.0">
                 <padding>
-                    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                    <Insets top="24.0" right="0.0" bottom="24.0" left="0.0"/>
                 </padding>
                 
-                <!-- Post Content -->
-                <VBox fx:id="postContainer" spacing="10.0" 
-                      style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;">
-                </VBox>
-                
-                <Separator />
-                
-                <!-- Comments Section -->
-                <VBox spacing="15.0">
-                    <Label text="Comments" styleClass="section-title" />
+                <!-- Centered Content Column -->
+                <VBox maxWidth="680.0" spacing="24.0">
                     
-                    <!-- Add Comment -->
-                    <HBox spacing="10.0" alignment="CENTER_LEFT">
-                        <TextField fx:id="commentField" promptText="Write a comment..." 
-                                   HBox.hgrow="ALWAYS" />
-                        <Button text="Post" onAction="#handlePostComment" styleClass="primary-button" />
-                    </HBox>
+                    <!-- Post Content Card -->
+                    <VBox fx:id="postContainer" spacing="16.0" styleClass="card"
+                          style="-fx-background-color: white; -fx-padding: 24px; 
+                                 -fx-border-color: #E8ECF2; -fx-border-width: 1px;
+                                 -fx-border-radius: 12px; -fx-background-radius: 12px;">
+                    </VBox>
                     
-                    <!-- Comments List -->
-                    <VBox fx:id="commentsContainer" spacing="10.0">
+                    <!-- Separator -->
+                    <Separator style="-fx-background-color: #E8ECF2;" />
+                    
+                    <!-- Comments Section -->
+                    <VBox spacing="16.0">
+                        <Label text="Comments" styleClass="h3-text" />
+                        
+                        <!-- Add Comment Card -->
+                        <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="card"
+                              style="-fx-background-color: white; -fx-padding: 16px; 
+                                     -fx-border-color: #E8ECF2; -fx-border-width: 1px;
+                                     -fx-border-radius: 12px; -fx-background-radius: 12px;">
+                            <TextField fx:id="commentField" promptText="Write a comment..." 
+                                       HBox.hgrow="ALWAYS" style="-fx-pref-height: 40px;" />
+                            <Button text="Post" onAction="#handlePostComment" 
+                                    styleClass="primary-button" style="-fx-pref-height: 40px;" />
+                        </HBox>
+                        
+                        <!-- Comments List -->
+                        <VBox fx:id="commentsContainer" spacing="12.0" />
                     </VBox>
                 </VBox>
             </VBox>

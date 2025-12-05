@@ -4,35 +4,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.example.skrtdesk.controller.LoginController">
+           fx:controller="com.example.skrtdesk.controller.LoginController"
+           styleClass="auth-background" prefWidth="1280" prefHeight="800">
     
-    <VBox alignment="CENTER" spacing="0.0">
-        <padding>
-            <Insets top="60.0" right="40.0" bottom="60.0" left="40.0"/>
-        </padding>
+    <!-- Centered Container -->
+    <VBox alignment="CENTER" spacing="0.0" VBox.vgrow="ALWAYS">
         
         <!-- Login Card -->
-        <VBox alignment="CENTER" spacing="0.0" maxWidth="440.0" styleClass="card">
+        <VBox alignment="CENTER" spacing="0.0" styleClass="auth-card">
+            
             <!-- Gradient Accent Bar -->
             <Region style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); 
                           -fx-background-radius: 12 12 0 0; -fx-pref-height: 4px;" />
             
-            <VBox alignment="CENTER" spacing="24.0">
+            <VBox alignment="CENTER" spacing="32.0">
                 <padding>
-                    <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+                    <Insets top="48.0" right="48.0" bottom="48.0" left="48.0"/>
                 </padding>
                 
                 <!-- Header -->
-                <VBox alignment="CENTER" spacing="8.0">
-                    <Text text="SKRT Social" styleClass="h1-text" style="-fx-fill: linear-gradient(to right, #667eea, #764ba2);" />
+                <VBox alignment="CENTER" spacing="12.0">
+                    <Text text="SKRT Social" styleClass="h1-text" style="-fx-fill: #667eea;" />
                     <Text text="Welcome back!" styleClass="body-large" style="-fx-fill: #6B7280;" />
                 </VBox>
                 
                 <!-- Form Fields -->
-                <VBox spacing="20.0">
+                <VBox spacing="24.0" prefWidth="360.0">
                     <VBox spacing="8.0">
                         <Label text="Email" styleClass="label" />
                         <TextField fx:id="emailField" promptText="name@example.com" 
@@ -51,7 +50,7 @@
                 
                 <!-- Login Button -->
                 <Button fx:id="loginButton" text="Sign In" onAction="#handleLogin" 
-                        styleClass="primary-button" maxWidth="Infinity" 
+                        styleClass="primary-button" prefWidth="360.0"
                         style="-fx-pref-height: 48px;" />
                 
                 <!-- Register Link -->

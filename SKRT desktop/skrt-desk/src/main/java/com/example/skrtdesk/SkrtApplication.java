@@ -14,11 +14,13 @@ public class SkrtApplication extends Application {
         ViewManager viewManager = ViewManager.getInstance();
         viewManager.setPrimaryStage(primaryStage);
         
-        // Set minimum and preferred window size
-        primaryStage.setMinWidth(1000);
-        primaryStage.setMinHeight(700);
-        primaryStage.setWidth(1200);
+        // Set fixed window dimensions
+        primaryStage.setWidth(1280);
         primaryStage.setHeight(800);
+        primaryStage.setMinWidth(1024);
+        primaryStage.setMinHeight(768);
+        primaryStage.setMaxWidth(1920);
+        primaryStage.setMaxHeight(1080);
         
         // Check if user is already logged in
         if (SessionManager.getInstance().isAuthenticated()) {

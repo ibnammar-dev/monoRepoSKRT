@@ -5,52 +5,74 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.skrtdesk.controller.EditProfileController">
+            fx:controller="com.example.skrtdesk.controller.EditProfileController"
+            prefWidth="1280" prefHeight="800" style="-fx-background-color: #F7F9FC;">
     
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="24.0">
             <padding>
-                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+                <Insets top="16.0" right="32.0" bottom="16.0" left="32.0"/>
             </padding>
             
             <Button text="← Back" onAction="#handleBack" styleClass="nav-button" />
-            <Label text="SKRT Social - Edit Profile" styleClass="navbar-title" />
+            <Label text="SKRT Social" styleClass="navbar-title" />
         </HBox>
     </top>
     
     <center>
-        <VBox spacing="20.0" alignment="CENTER">
-            <padding>
-                <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
-            </padding>
-            
-            <VBox spacing="15.0" maxWidth="400.0">
-                <Label text="Edit Profile" styleClass="page-title" />
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    style="-fx-background: #F7F9FC; -fx-background-color: #F7F9FC;">
+            <VBox alignment="TOP_CENTER" spacing="0.0">
+                <padding>
+                    <Insets top="24.0" right="0.0" bottom="24.0" left="0.0"/>
+                </padding>
                 
-                <VBox spacing="5.0">
-                    <Label text="First Name" />
-                    <TextField fx:id="firstNameField" />
+                <!-- Centered Content Column -->
+                <VBox maxWidth="680.0" spacing="24.0">
+                    
+                    <!-- Page Title -->
+                    <Label text="Edit Profile" styleClass="h2-text" />
+                    
+                    <!-- Edit Form Card -->
+                    <VBox spacing="24.0" styleClass="card"
+                          style="-fx-background-color: white; -fx-padding: 32px; 
+                                 -fx-border-color: #E8ECF2; -fx-border-width: 1px;
+                                 -fx-border-radius: 12px; -fx-background-radius: 12px;">
+                        
+                        <!-- Form Fields -->
+                        <VBox spacing="20.0">
+                            <HBox spacing="16.0">
+                                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                    <Label text="First Name" styleClass="label" />
+                                    <TextField fx:id="firstNameField" style="-fx-pref-height: 48px;" />
+                                </VBox>
+                                
+                                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Last Name" styleClass="label" />
+                                    <TextField fx:id="lastNameField" style="-fx-pref-height: 48px;" />
+                                </VBox>
+                            </HBox>
+                            
+                            <VBox spacing="8.0">
+                                <Label text="Email" styleClass="label" />
+                                <TextField fx:id="emailField" style="-fx-pref-height: 48px;" />
+                            </VBox>
+                            
+                            <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false" 
+                                   wrapText="true" />
+                        </VBox>
+                        
+                        <!-- Action Buttons -->
+                        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+                            <Button text="Cancel" onAction="#handleCancel" 
+                                    styleClass="secondary-button" style="-fx-pref-height: 48px; -fx-pref-width: 120px;" />
+                            <Button fx:id="saveButton" text="Save Changes" onAction="#handleSave" 
+                                    styleClass="primary-button" style="-fx-pref-height: 48px; -fx-pref-width: 150px;" />
+                        </HBox>
+                    </VBox>
                 </VBox>
-                
-                <VBox spacing="5.0">
-                    <Label text="Last Name" />
-                    <TextField fx:id="lastNameField" />
-                </VBox>
-                
-                <VBox spacing="5.0">
-                    <Label text="Email" />
-                    <TextField fx:id="emailField" />
-                </VBox>
-                
-                <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false" />
-                
-                <HBox spacing="10.0" alignment="CENTER">
-                    <Button text="Cancel" onAction="#handleCancel" />
-                    <Button fx:id="saveButton" text="Save Changes" onAction="#handleSave" 
-                            styleClass="primary-button" />
-                </HBox>
             </VBox>
-        </VBox>
+        </ScrollPane>
     </center>
 </BorderPane>
 

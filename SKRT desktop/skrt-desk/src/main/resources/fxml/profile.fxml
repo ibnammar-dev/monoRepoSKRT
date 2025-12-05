@@ -3,14 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.skrtdesk.controller.ProfileController">
+            fx:controller="com.example.skrtdesk.controller.ProfileController"
+            prefWidth="1280" prefHeight="800" style="-fx-background-color: #F7F9FC;">
     
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="24.0">
             <padding>
-                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+                <Insets top="16.0" right="32.0" bottom="16.0" left="32.0"/>
             </padding>
             
             <Label text="SKRT Social" styleClass="navbar-title" />
@@ -26,29 +28,62 @@
     </top>
     
     <center>
-        <ScrollPane fitToWidth="true" styleClass="feed-scroll">
-            <VBox spacing="20.0">
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    style="-fx-background: #F7F9FC; -fx-background-color: #F7F9FC;">
+            <VBox alignment="TOP_CENTER" spacing="0.0">
                 <padding>
-                    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                    <Insets top="24.0" right="0.0" bottom="24.0" left="0.0"/>
                 </padding>
                 
-                <!-- Profile Header -->
-                <VBox spacing="15.0" styleClass="profile-header">
-                    <Label fx:id="nameLabel" text="User Name" styleClass="profile-name" />
-                    <Label fx:id="emailLabel" text="user@email.com" styleClass="profile-email" />
-                    <Label fx:id="joinedLabel" text="Joined: 2024" styleClass="profile-joined" />
+                <!-- Centered Content Column -->
+                <VBox maxWidth="680.0" spacing="24.0">
                     
-                    <Button fx:id="editButton" text="Edit Profile" onAction="#handleEditProfile" 
-                            styleClass="primary-button" visible="false" managed="false" />
-                </VBox>
-                
-                <Separator />
-                
-                <!-- User Posts -->
-                <VBox spacing="15.0">
-                    <Label text="Posts" styleClass="section-title" />
-                    <VBox fx:id="postsContainer" spacing="15.0">
-                        <Label text="Loading posts..." style="-fx-text-fill: #666;" />
+                    <!-- Profile Header Card -->
+                    <VBox spacing="0.0" styleClass="card"
+                          style="-fx-background-color: white; -fx-border-color: #E8ECF2; 
+                                 -fx-border-width: 1px; -fx-border-radius: 12px; 
+                                 -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+                        
+                        <!-- Gradient Cover -->
+                        <Region style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                      -fx-background-radius: 12 12 0 0; -fx-pref-height: 120px;" />
+                        
+                        <!-- Profile Content -->
+                        <VBox spacing="16.0" alignment="TOP_CENTER">
+                            <padding>
+                                <Insets top="0.0" right="32.0" bottom="32.0" left="32.0"/>
+                            </padding>
+                            
+                            <!-- Avatar (overlapping cover) -->
+                            <StackPane translateY="-48.0">
+                                <ImageView fx:id="avatarImage" fitWidth="96" fitHeight="96" preserveRatio="true"
+                                          style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 4);">
+                                    <viewport>
+                                        <Rectangle2D width="96" height="96" />
+                                    </viewport>
+                                </ImageView>
+                            </StackPane>
+                            
+                            <!-- User Info -->
+                            <VBox spacing="8.0" alignment="CENTER" translateY="-32.0">
+                                <Label fx:id="nameLabel" text="User Name" styleClass="h2-text" />
+                                <Label fx:id="emailLabel" text="user@email.com" styleClass="body-text" 
+                                       style="-fx-text-fill: #6B7280;" />
+                                <Label fx:id="joinedLabel" text="Joined: 2024" styleClass="small-text" 
+                                       style="-fx-text-fill: #9CA3AF;" />
+                            </VBox>
+                            
+                            <!-- Edit Button -->
+                            <Button fx:id="editButton" text="Edit Profile" onAction="#handleEditProfile" 
+                                    styleClass="secondary-button" visible="false" managed="false"
+                                    translateY="-24.0" style="-fx-pref-height: 40px; -fx-pref-width: 140px;" />
+                        </VBox>
+                    </VBox>
+                    
+                    <!-- Posts Section -->
+                    <VBox spacing="16.0">
+                        <Label text="Posts" styleClass="h3-text" />
+                        <VBox fx:id="postsContainer" spacing="16.0" />
                     </VBox>
                 </VBox>
             </VBox>

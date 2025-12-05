@@ -5,68 +5,89 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.skrtdesk.controller.AdminController">
+            fx:controller="com.example.skrtdesk.controller.AdminController"
+            prefWidth="1280" prefHeight="800" style="-fx-background-color: #F7F9FC;">
     
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20.0">
-            <padding>
-                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
-            </padding>
+        <VBox spacing="0.0">
+            <!-- Navbar -->
+            <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="24.0">
+                <padding>
+                    <Insets top="16.0" right="32.0" bottom="16.0" left="32.0"/>
+                </padding>
+                
+                <Label text="SKRT Social" styleClass="navbar-title" />
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
+                <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
+                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
+            </HBox>
             
-            <Label text="SKRT Social - Admin Dashboard" styleClass="navbar-title" />
-            
-            <Region HBox.hgrow="ALWAYS" />
-            
-            <Button text="Feed" onAction="#handleFeed" styleClass="nav-button" />
-            <Button text="Profile" onAction="#handleProfile" styleClass="nav-button" />
-            <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary" />
-        </HBox>
+            <!-- Admin Header -->
+            <VBox spacing="8.0" style="-fx-background-color: white; -fx-border-color: #E8ECF2; -fx-border-width: 0 0 1 0;">
+                <padding>
+                    <Insets top="24.0" right="32.0" bottom="24.0" left="32.0"/>
+                </padding>
+                <Label text="Admin Dashboard" styleClass="h2-text" />
+                <Label text="Manage users and content" styleClass="body-text" style="-fx-text-fill: #6B7280;" />
+            </VBox>
+        </VBox>
     </top>
     
     <center>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
-            <Tab text="Users">
-                <VBox spacing="15.0">
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
-                    </padding>
+        <TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: #F7F9FC;">
+            <!-- Users Tab -->
+            <Tab text="Users" style="-fx-font-size: 15px;">
+                <VBox spacing="20.0" styleClass="full-width-content">
                     
-                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                        <Label text="User Management" styleClass="section-title" />
+                    <!-- Actions Bar -->
+                    <HBox alignment="CENTER_LEFT" spacing="16.0">
+                        <Label text="User Management" styleClass="h3-text" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button text="Refresh" onAction="#handleRefreshUsers" />
+                        <Button text="🔄 Refresh" onAction="#handleRefreshUsers" 
+                                styleClass="secondary-button" style="-fx-pref-height: 40px;" />
                     </HBox>
                     
-                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                    <!-- Users Table -->
+                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: white; -fx-border-color: #E8ECF2; 
+                                      -fx-border-width: 1px; -fx-border-radius: 12px; 
+                                      -fx-background-radius: 12px;">
                         <columns>
                             <TableColumn fx:id="userIdColumn" text="ID" prefWidth="60" />
-                            <TableColumn fx:id="userEmailColumn" text="Email" prefWidth="200" />
+                            <TableColumn fx:id="userEmailColumn" text="Email" prefWidth="220" />
                             <TableColumn fx:id="userFirstNameColumn" text="First Name" prefWidth="150" />
                             <TableColumn fx:id="userLastNameColumn" text="Last Name" prefWidth="150" />
-                            <TableColumn fx:id="userRolesColumn" text="Roles" prefWidth="150" />
-                            <TableColumn fx:id="userActionsColumn" text="Actions" prefWidth="100" />
+                            <TableColumn fx:id="userRolesColumn" text="Roles" prefWidth="180" />
+                            <TableColumn fx:id="userActionsColumn" text="Actions" prefWidth="120" />
                         </columns>
                     </TableView>
                 </VBox>
             </Tab>
             
-            <Tab text="Posts">
-                <VBox spacing="15.0">
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
-                    </padding>
+            <!-- Posts Tab -->
+            <Tab text="Posts" style="-fx-font-size: 15px;">
+                <VBox spacing="20.0" styleClass="full-width-content">
                     
-                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                        <Label text="Post Management" styleClass="section-title" />
+                    <!-- Actions Bar -->
+                    <HBox alignment="CENTER_LEFT" spacing="16.0">
+                        <Label text="Post Management" styleClass="h3-text" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button text="Refresh" onAction="#handleRefreshPosts" />
+                        <Button text="🔄 Refresh" onAction="#handleRefreshPosts" 
+                                styleClass="secondary-button" style="-fx-pref-height: 40px;" />
                     </HBox>
                     
-                    <TableView fx:id="postsTable" VBox.vgrow="ALWAYS">
+                    <!-- Posts Table -->
+                    <TableView fx:id="postsTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: white; -fx-border-color: #E8ECF2; 
+                                      -fx-border-width: 1px; -fx-border-radius: 12px; 
+                                      -fx-background-radius: 12px;">
                         <columns>
                             <TableColumn fx:id="postIdColumn" text="ID" prefWidth="60" />
-                            <TableColumn fx:id="postAuthorColumn" text="Author" prefWidth="150" />
-                            <TableColumn fx:id="postTextColumn" text="Text" prefWidth="300" />
+                            <TableColumn fx:id="postAuthorColumn" text="Author" prefWidth="180" />
+                            <TableColumn fx:id="postTextColumn" text="Text" prefWidth="360" />
                             <TableColumn fx:id="postLikesColumn" text="Likes" prefWidth="80" />
                             <TableColumn fx:id="postCommentsColumn" text="Comments" prefWidth="100" />
                             <TableColumn fx:id="postActionsColumn" text="Actions" prefWidth="100" />
